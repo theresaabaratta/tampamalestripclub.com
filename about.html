@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About — Tampa Male Strip Club Directory</title>
+<meta name="description" content="What the Tampa Male Strip Club directory is, how listings are chosen, and who it's for.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+<style>
+/* ==========================================================================
+   Tampa Male Strip Club Directory — design tokens
+   ========================================================================== */
+:root{
+  --ink:        #14101A;   /* near-black eggplant background */
+  --ink-2:      #1F1720;   /* raised panel on dark */
+  --ink-3:      #2A1D24;   /* card border tint */
+  --paper:      #F7F1E6;   /* warm cream for light sections */
+  --paper-2:    #EFE6D6;
+  --ember:      #E24A2B;   /* hot orange-red accent */
+  --ember-dim:  #B5391F;
+  --gold:       #E7B24C;   /* marquee gold */
+  --muted:      #BDAFB4;   /* muted text on dark */
+  --muted-2:    #6B5E63;   /* muted text on light */
+  --white:      #FDFBF8;
+
+  --font-display: "Big Shoulders Display", sans-serif;
+  --font-body: "Work Sans", sans-serif;
+}
+
+*{ box-sizing: border-box; }
+
+html{ scroll-behavior: smooth; }
+
+body{
+  background: var(--ink);
+  color: var(--white);
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+::selection{ background: var(--ember); color: var(--white); }
+
+a{ color: inherit; text-decoration: none; }
+
+h1,h2,h3,h4,.display{
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  line-height: 0.95;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+p{ max-width: 62ch; }
+
+.container-nar{ max-width: 1140px; margin: 0 auto; padding: 0 1.5rem; }
+
+/* focus visibility */
+a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible{
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce){
+  *{ animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}
+
+/* ---------------------------------- nav ---------------------------------- */
+.site-nav{
+  position: sticky; top:0; z-index: 50;
+  background: rgba(20,16,26,0.92);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid var(--ink-3);
+}
+.site-nav .container-nar{
+  display:flex; align-items:center; justify-content:space-between;
+  padding-top: .85rem; padding-bottom: .85rem;
+}
+.brand{
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  letter-spacing: .02em;
+  display:flex; flex-direction:column; line-height: 0.9;
+}
+.brand span{ color: var(--ember); }
+.brand small{
+  font-family: var(--font-body);
+  text-transform: none;
+  font-size: .62rem;
+  letter-spacing: .12em;
+  color: var(--muted);
+  margin-top: .3rem;
+}
+.nav-links{ display:flex; gap: 1.75rem; align-items:center; }
+.nav-links a{
+  font-size: .92rem;
+  color: var(--muted);
+  border-bottom: 2px solid transparent;
+  padding-bottom: 2px;
+}
+.nav-links a:hover, .nav-links a.active{ color: var(--white); border-color: var(--ember); }
+.nav-cta{
+  background: var(--ember); color: var(--white) !important;
+  padding: .55rem 1.15rem; font-weight: 600; font-size: .85rem;
+  border: none;
+}
+.nav-toggle{ display:none; background:none; border:none; color:var(--white); font-size:1.6rem; }
+
+@media (max-width: 860px){
+  .nav-links{
+    position:absolute; top: 100%; left:0; right:0;
+    background: var(--ink-2); flex-direction:column; align-items:flex-start;
+    padding: 1.25rem 1.5rem; gap: 1rem; border-bottom: 1px solid var(--ink-3);
+    display:none;
+  }
+  .nav-links.open{ display:flex; }
+  .nav-toggle{ display:block; }
+}
+
+/* ---------------------------------- hero ---------------------------------- */
+.hero{
+  position:relative;
+  padding: 5.5rem 0 4.5rem;
+  overflow:hidden;
+  background:
+    radial-gradient(ellipse at 85% 0%, rgba(226,74,43,0.28), transparent 55%),
+    linear-gradient(180deg, #16111C 0%, #14101A 70%);
+  border-bottom: 1px solid var(--ink-3);
+}
+.hero-eyebrow{
+  color: var(--gold);
+  font-size: .85rem;
+  letter-spacing: .04em;
+  margin-bottom: 1rem;
+}
+.hero h1{
+  font-size: clamp(3rem, 8vw, 6.2rem);
+  max-width: 14ch;
+}
+.hero h1 em{ font-style: normal; color: var(--ember); }
+.hero-sub{
+  color: var(--muted);
+  max-width: 46ch;
+  margin-top: 1.4rem;
+  font-size: 1.1rem;
+}
+.hero-actions{ margin-top: 2.2rem; display:flex; gap: 1rem; flex-wrap: wrap; }
+
+.btn-ember{
+  background: var(--ember); color: var(--white);
+  padding: .85rem 1.6rem; font-weight: 600; border: none; font-size: .95rem;
+  display:inline-block;
+}
+.btn-ember:hover{ background: var(--ember-dim); color:var(--white); }
+.btn-ghost{
+  border: 1px solid var(--muted); color: var(--white);
+  padding: .85rem 1.6rem; font-weight: 600; font-size: .95rem;
+  display:inline-block;
+}
+.btn-ghost:hover{ border-color: var(--gold); color: var(--gold); }
+
+.hero-stats{
+  margin-top: 3.5rem; display:flex; gap: 2.75rem; flex-wrap: wrap;
+  border-top: 1px solid var(--ink-3); padding-top: 1.75rem;
+}
+.hero-stats .num{ font-family: var(--font-display); font-size: 2.4rem; color: var(--gold); line-height: 1; }
+.hero-stats .lbl{ color: var(--muted); font-size: .8rem; letter-spacing: .03em; margin-top: .35rem; }
+
+/* --------------------------- section scaffolding --------------------------- */
+section{ padding: 5rem 0; }
+.section-head{ max-width: 640px; margin-bottom: 2.75rem; }
+.section-tag{ color: var(--ember); font-size: .85rem; letter-spacing: .04em; margin-bottom: .6rem; display:block; }
+.section-head h2{ font-size: clamp(2rem, 4vw, 2.9rem); }
+.section-head p{ color: var(--muted); margin-top: .9rem; }
+
+.section-dark{ background: var(--ink); }
+.section-panel{ background: var(--ink-2); border-top: 1px solid var(--ink-3); border-bottom: 1px solid var(--ink-3); }
+.section-paper{ background: var(--paper); color: #241A1E; }
+.section-paper .section-tag{ color: var(--ember-dim); }
+.section-paper .section-head p{ color: var(--muted-2); }
+.section-paper h1, .section-paper h2, .section-paper h3, .section-paper h4{ color: #201620; }
+
+/* ------------------------------- listing rows ------------------------------- */
+.listing{
+  display:grid;
+  grid-template-columns: 90px 1fr auto;
+  gap: 1.75rem;
+  align-items: start;
+  padding: 1.85rem 0;
+  border-top: 1px dashed var(--ink-3);
+}
+.listing:last-child{ border-bottom: 1px dashed var(--ink-3); }
+.listing-mark{
+  font-family: var(--font-display);
+  font-size: 2.4rem;
+  color: var(--ink-3);
+}
+.listing.featured .listing-mark{ color: var(--ember); }
+.listing h3{ font-size: 1.5rem; text-transform: none; letter-spacing: 0; }
+.listing .kicker{ color: var(--gold); font-size: .78rem; letter-spacing: .06em; text-transform: uppercase; margin-bottom: .4rem; display:block; }
+.listing p{ color: var(--muted); margin-top: .6rem; font-size: .96rem; }
+.listing-meta{ list-style:none; padding:0; margin: .9rem 0 0; display:flex; flex-wrap:wrap; gap: 1.25rem; font-size: .86rem; color: var(--muted); }
+.listing-meta li{ display:flex; align-items:center; gap:.45rem; }
+.listing-meta i{ color: var(--ember); }
+.listing-link{
+  align-self: center;
+  border: 1px solid var(--ink-3); padding: .6rem 1.15rem;
+  font-size: .85rem; font-weight: 600; white-space: nowrap;
+}
+.listing-link:hover{ border-color: var(--ember); color: var(--ember); }
+
+@media (max-width: 700px){
+  .listing{ grid-template-columns: 1fr; }
+  .listing-mark{ display:none; }
+  .listing-link{ justify-self: flex-start; }
+}
+
+/* --------------------------------- cards ---------------------------------- */
+.tile{
+  background: var(--ink-2);
+  border: 1px solid var(--ink-3);
+  padding: 2rem;
+  height: 100%;
+}
+.tile .num{ font-family: var(--font-display); color: var(--ember); font-size: 1.6rem; margin-bottom: .75rem; display:block;}
+.tile h3{ font-size: 1.25rem; text-transform:none; letter-spacing:0; margin-bottom:.6rem; }
+.tile p{ color: var(--muted); font-size: .93rem; }
+
+/* -------------------------------- CTA band -------------------------------- */
+.cta-band{
+  background: linear-gradient(120deg, #2A1116, #1B1013 60%);
+  border-top: 1px solid var(--ink-3);
+  padding: 4rem 0;
+}
+.cta-band-inner{ display:flex; justify-content:space-between; align-items:center; gap: 2rem; flex-wrap: wrap; }
+.cta-band h2{ font-size: clamp(1.8rem, 4vw, 2.6rem); max-width: 16ch; }
+.cta-band p{ color: var(--muted); margin-top: .6rem; }
+
+/* -------------------------------- footer -------------------------------- */
+footer{ background: #0F0C12; border-top: 1px solid var(--ink-3); padding: 3.5rem 0 2rem; }
+footer h4{ font-size: 1rem; text-transform: uppercase; letter-spacing: .06em; color: var(--gold); margin-bottom: 1.1rem; font-family: var(--font-body); font-weight: 600;}
+footer ul{ list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:.65rem; }
+footer a{ color: var(--muted); font-size: .92rem; }
+footer a:hover{ color: var(--white); }
+.footer-bottom{
+  margin-top: 3rem; padding-top: 1.75rem; border-top: 1px solid var(--ink-3);
+  display:flex; justify-content:space-between; flex-wrap:wrap; gap: 1rem;
+  color: var(--muted-2); font-size: .82rem;
+}
+.disclaimer-box{
+  border: 1px solid var(--ink-3); background: rgba(226,74,43,0.06);
+  padding: 1.25rem 1.5rem; font-size: .85rem; color: var(--muted); margin-top: 2.5rem;
+}
+.disclaimer-box strong{ color: var(--gold); }
+
+/* --------------------------------- forms --------------------------------- */
+.form-control-dark{
+  background: var(--ink); border: 1px solid var(--ink-3); color: var(--white);
+  padding: .85rem 1rem; width: 100%; font-family: var(--font-body);
+}
+.form-control-dark:focus{ outline: 2px solid var(--gold); border-color: var(--gold); }
+label.form-label{ font-size: .85rem; letter-spacing: .03em; color: var(--muted); margin-bottom: .4rem; display:block; }
+
+/* --------------------------------- misc --------------------------------- */
+.marquee-frame{
+  border: 1px solid var(--ink-3);
+  padding: 2.5rem;
+  background:
+    repeating-linear-gradient(135deg, rgba(231,178,76,0.05) 0 2px, transparent 2px 14px),
+    var(--ink-2);
+}
+.badge-soft{
+  display:inline-block; border:1px solid var(--ink-3); color: var(--muted);
+  font-size: .75rem; padding: .3rem .7rem; letter-spacing: .04em; margin-right:.5rem; margin-bottom:.5rem;
+}
+.contact-line{ display:flex; gap:.75rem; align-items:flex-start; margin-bottom:1.1rem; color: var(--muted); }
+.contact-line i{ color: var(--ember); margin-top: .2rem; }
+.contact-line strong{ color: var(--white); display:block; font-weight:600; }
+
+.page-hero{
+  padding: 3.5rem 0 3rem;
+  background: radial-gradient(ellipse at 15% 0%, rgba(226,74,43,0.22), transparent 55%), var(--ink);
+  border-bottom: 1px solid var(--ink-3);
+}
+.page-hero h1{ font-size: clamp(2.4rem, 6vw, 4rem); }
+.page-hero p{ color: var(--muted); margin-top: 1rem; max-width: 55ch; }
+
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="container-nar">
+    <a href="index.html" class="brand">TAMPA<span>MALE</span>STRIP CLUB
+      <small>TAMPA'S MALE ENTERTAINMENT DIRECTORY</small>
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">&#9776;</button>
+    <div class="nav-links" id="navLinks">
+      <a href="index.html#shows">Shows</a>
+      <a href="index.html#directory">Directory</a>
+      <a href="index.html#independent">Independent Talent</a>
+      <a href="index.html#faq">FAQ</a>
+      <a href="about.html" class="active">About</a>
+      <a href="contact.html" class="nav-cta">Get Listed</a>
+    </div>
+  </div>
+</nav>
+
+<header class="page-hero">
+  <div class="container-nar">
+    <span class="hero-eyebrow">ABOUT THIS DIRECTORY</span>
+    <h1>Built for one job: finding a good show in Tampa.</h1>
+    <p>We list the clubs, agencies, and booking routes for male exotic entertainment in Tampa, FL, so you spend less time guessing and more time planning the night itself.</p>
+  </div>
+</header>
+
+<section class="section-dark">
+  <div class="container-nar">
+    <div class="row g-5">
+      <div class="col-lg-7">
+        <div class="section-head">
+          <span class="section-tag">WHY THIS EXISTS</span>
+          <h2>Tampa's male revue scene is smaller and harder to search than the female club scene.</h2>
+        </div>
+        <p style="color:var(--muted);">
+          Search "male strip club Tampa" and you'll mostly find dead directories, private-party dispatch
+          services mislabeled as clubs, and a lot of outdated Yellow Pages listings. This site exists to cut
+          through that: one page for the region's continuous male revue show, the agencies that book private
+          male entertainment, and honest guidance on the independent-dancer side of the market.
+        </p>
+        <p style="color:var(--muted);">
+          We're not a talent agency ourselves. We link out to the venues and services that do the actual
+          booking, and we keep the directory current as shows, agencies, and contact details change.
+        </p>
+      </div>
+      <div class="col-lg-5">
+        <div class="tile h-100">
+          <span class="num"><i class="fa-solid fa-list-check"></i></span>
+          <h3>How a listing gets added</h3>
+          <p style="margin-bottom:1rem;">A business gets listed here if it:</p>
+          <ul style="color:var(--muted); font-size:.93rem; padding-left:1.2rem;">
+            <li class="mb-2">Actively operates or books male exotic entertainment in the Tampa Bay area</li>
+            <li class="mb-2">Has a working, current contact method (site, phone, or social page)</li>
+            <li class="mb-2">Confirms it's 18+ only, no exceptions</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-panel">
+  <div class="container-nar">
+    <div class="section-head">
+      <span class="section-tag">WHO IT'S FOR</span>
+      <h2>Planners, not just partygoers</h2>
+      <p>Most visitors land here for one of three reasons.</p>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="tile">
+          <span class="num">1</span>
+          <h3>Bachelorette &amp; birthday planners</h3>
+          <p>Comparing a stage show against a private in-home booking, and figuring out group sizes, timing, and cost before committing.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="tile">
+          <span class="num">2</span>
+          <h3>First-time visitors</h3>
+          <p>People who've never been to a male revue and want to know what to expect &mdash; dress code, tipping, and how the night runs.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="tile">
+          <span class="num">3</span>
+          <h3>Venues &amp; agencies</h3>
+          <p>Tampa-area businesses in this niche looking to be listed alongside the region's other shows and booking services.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-band">
+  <div class="container-nar cta-band-inner">
+    <div>
+      <h2>Run a Tampa show or agency?</h2>
+      <p>Send your details through the contact page and we'll review your listing.</p>
+    </div>
+    <a href="contact.html" class="btn-ember">Request a listing</a>
+  </div>
+</section>
+
+<footer>
+  <div class="container-nar">
+    <div class="row g-4">
+      <div class="col-lg-4">
+        <a href="index.html" class="brand" style="margin-bottom:1rem; display:inline-flex;">TAMPA<span>MALE</span>STRIP CLUB</a>
+        <p style="color:var(--muted); font-size:.92rem; margin-top:1rem;">An independent directory of male revues, booking agencies, and entertainment options in Tampa, FL. 18+ only.</p>
+      </div>
+      <div class="col-6 col-lg-2">
+        <h4>Directory</h4>
+        <ul>
+          <li><a href="index.html#shows">Featured show</a></li>
+          <li><a href="index.html#directory">Full directory</a></li>
+          <li><a href="index.html#independent">Independent talent</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-lg-2">
+        <h4>Site</h4>
+        <ul>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="index.html#faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-4">
+        <h4>Get in touch</h4>
+        <ul>
+          <li><i class="fa-solid fa-location-dot me-2"></i>11921 N Dale Mabry Hwy, Tampa, FL 33618</li>
+          <li><i class="fa-solid fa-phone me-2"></i>(813) 550-5338</li>
+          <li><i class="fa-solid fa-envelope me-2"></i>floridathunder.info@gmail.com</li>
+          <li><a href="https://www.facebook.com/FloridaThunder/" target="_blank" rel="noopener"><i class="fa-brands fa-facebook me-2"></i>Florida Thunder on Facebook</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Tampa Male Strip Club Directory. All rights reserved.</span>
+      <span>Independent directory &mdash; not an official booking agent for listed third parties.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var toggle = document.getElementById('navToggle');
+  var links = document.getElementById('navLinks');
+  if (toggle && links) {
+    toggle.addEventListener('click', function () {
+      var isOpen = links.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+  }
+});
+
+</script>
+</body>
+</html>
